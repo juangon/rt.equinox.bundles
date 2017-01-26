@@ -34,6 +34,13 @@ public class ProxyServlet extends HttpServlet {
 		super.init(config);
 
 		Activator.addProxyServlet(this);
+
+		registerHttpSessionListener();
+	}
+
+	protected void registerHttpSessionListener() {
+		getServletConfig().getServletContext().addListener(
+			new HttpSessionAdaptor.HttpSessionAdaptorParentListenerBridge());
 	}
 
 	public void destroy() {
